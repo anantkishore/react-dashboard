@@ -8,39 +8,34 @@ function App() {
   const [events, setEventsArray] = useState([]);
 
   useEffect(() => {
-    fetch(`/api/events`)
+    fetch(`/iris/api/events`)
       .then((response) => response.json())
-      .then((json) => 
+      .then((jsonData) => 
       {
-        console.log(json);
-        setEventsArray([json]);
+
+        console.log(`jsonData type:: ` + typeof(jsonData));
+        console.log(`jsonData:: ` + jsonData);
+        var obj = JSON.parse(jsonData);
+        setEventsArray(obj);
+        console.log(`event_type`)
+        console.log(typeof(events));
+        console.log(events);
       });
   }, []);
 
 
-  
   return (
     
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+       
         <div className="App">
       {
-        events.map(event => <div>{event.message} </div>)
+          
+          events.map(item => <tr class="abcd" key={item.id}><th class="defg">{item.sap_code}</th><th>{item.operation}</th><th>{item.start_time}</th><th>{item.end_time}</th></tr>)
+          
       }
     </div>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
     </div>
   );
 }

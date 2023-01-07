@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.abcd {
+  background-color: #07a154;
+  border-style: solid;
+  border-width: 15px;
+  border-color: #b60808;
+}
+
+*.th {
+  background-color: blue;
+  border-style: solid;
+  border-width: 15px;
+  border-color: #b60808;
+}
