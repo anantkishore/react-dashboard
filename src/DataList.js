@@ -12,18 +12,7 @@ function DataList(){
 
     const [events, setEventsArray] = useState([]);
 
-    const { ExportCSVButton } = CSVExport;
 
-    const MyExportCSV = (props) => {
-        const handleClick = () => {
-            props.onExport();
-        };
-        return (
-            <div>
-                <button className="btn btn-success" onClick={habdleClick}>Export to CSV</button>
-            </div>
-        );
-    };
 
     const columns = [
         {dataField:'id', text: 'Id'},
@@ -68,15 +57,32 @@ function DataList(){
         });
     }, []);
 
-    return <div>
-        <BootstrapTable 
-        bootstrap4 
-        keyField="id" 
-        columns={columns} 
-        data={events}
-        pagination={pagination}
-        filter={filterFactory()} />
-    </div>
+    const { ExportCSVButton } = CSVExport;
+
+
+
+    return 
+<div>
+<ToolkitProvider
+  keyField="id"
+  data={ events }
+  columns={ columns }
+  exportCSV
+>
+  {
+    props => (
+      <div>
+        <ExportCSVButton { ...props.csvProps }>Export CSV!!</ExportCSVButton>
+        <hr />
+        <BootstrapTable
+          { ...props.baseProps }
+        />
+      </div>
+    )
+  }
+</ToolkitProvider>
+</div>   
+
 }
 
 export default DataList;
